@@ -57,3 +57,16 @@ let empHrsNew = getWorkingHours(Math.floor(Math.random() * 10) % 3);
 let empWageNew = empHrsNew * WAGE_PER_HOUR;
 console.log("Refactored - Employee worked:", empHrsNew, "hours");
 console.log("Refactored - Employee Wage: $" + empWageNew);
+
+// UC4: Calculating Wages for a Month
+const NUM_OF_WORKING_DAYS = 20;
+let totalEmpHrs = 0;
+
+for (let day = 0; day < NUM_OF_WORKING_DAYS; day++) {
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    totalEmpHrs += getWorkingHours(empCheck);
+}
+
+// Calculate total wage for the month
+let totalEmpWage = totalEmpHrs * WAGE_PER_HOUR;
+console.log("Total Hours: " + totalEmpHrs + " Emp Wage: $" + totalEmpWage);
