@@ -1,15 +1,14 @@
-// UC1 To Check Employee Presence
+// UC1: To Check Employee Presence
+const IS_ABSENT = 0;
+let empCheck = Math.floor(Math.random() * 10) % 2;
 
-const IS_ABSENT = 0
-let empCheck = Math.floor(Math.random()*10)%2;
-if(empCheck == IS_ABSENT){
+if (empCheck === IS_ABSENT) {
     console.log("Employee is ABSENT");
-    return;
-} else{
-    console.log("Employee is PRESENT")
+} else {
+    console.log("Employee is PRESENT");
 }
 
-// UC2 Calculating Employee Wage
+// UC2: Calculating Employee Wage
 
 // Constants for work types and wages
 const IS_PART_TIME = 1;
@@ -19,11 +18,11 @@ const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
 
 // Generate a random number to decide work type
-let empCheckWorkType = Math.floor(Math.random() * 10) % 3;
+empCheck = Math.floor(Math.random() * 10) % 3; 
 
 // Determine employee work hours based on empCheck
 let empHrs = 0;
-switch (empCheckWorkType) {
+switch (empCheck) {
     case IS_PART_TIME:
         empHrs = PART_TIME_HOURS;
         break;
@@ -31,10 +30,10 @@ switch (empCheckWorkType) {
         empHrs = FULL_TIME_HOURS;
         break;
     default:
-        empHrs = 0; // Employee is absent
+        empHrs = 0; 
 }
 
 // Calculate wage
 let empWage = empHrs * WAGE_PER_HOUR;
 console.log("Employee worked:", empHrs, "hours");
-console.log("Emp Wage: $" + empWage);
+console.log("Employee Wage: $" + empWage);
