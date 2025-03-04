@@ -88,4 +88,3 @@ while (totalEmpHrsUC5 < MAX_HRS_IN_MONTH && totalWorkingDaysUC5 < NUM_OF_WORKING
 // Calculate total wage for UC5
 let totalEmpWageUC5 = totalEmpHrsUC5 * WAGE_PER_HOUR;
 console.log("\nUC5 Total Days: " + totalWorkingDaysUC5 + " Total Hrs: " + totalEmpHrsUC5 + " Emp Wage: $" + totalEmpWageUC5);
-calculate-wages-till-condition-met
