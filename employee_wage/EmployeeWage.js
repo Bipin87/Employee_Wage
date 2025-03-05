@@ -115,3 +115,34 @@ console.log("UC6 Total Days:", totalWorkingDaysUC6, "Total Hrs:", totalEmpHrsUC6
 
 // Print Daily Wages Array
 console.log("Daily Wages:", empDailyWageArr);
+
+//UC7: Employee Wage Problem to use Object Helper Functions and Arrow Functions to perform following operations
+
+// UC7A: Calculate total Wage using Array reduce method
+const totalWages = empDailyWageArr.reduce((total, dailyWage) => total + dailyWage, 0);
+console.log("UC7A Total Wage using reduce:", totalWages);
+
+// UC7B: Show Day along with Daily Wage using map function
+let dailyCounter = 0;
+const mapDayWithWageArr = empDailyWageArr.map(dailyWage => `Day ${++dailyCounter}: $${dailyWage}`);
+console.log("UC7B Daily Wage Map:", mapDayWithWageArr);
+
+// UC7C: Show Days when full-time wage of 160 was earned
+const fullDayWageArr = mapDayWithWageArr.filter(dailyWage => dailyWage.includes("160"));
+console.log("UC7C Days with Full-time Wage:", fullDayWageArr);
+
+// UC7D: Find first occurrence of Full-time Wage
+const firstFullTimeWageDay = mapDayWithWageArr.find(dailyWage => dailyWage.includes("160"));
+console.log("UC7D First Full-time Wage Day:", firstFullTimeWageDay);
+
+// UC7E: Check if all elements in Full-time Wage Array hold Full-time Wage
+const allFullTimeWage = fullDayWageArr.every(dailyWage => dailyWage.includes("160"));
+console.log("UC7E All entries Full-time Wage:", allFullTimeWage);
+
+// UC7F: Check if there is any Part-time Wage
+const anyPartTimeWage = mapDayWithWageArr.some(dailyWage => dailyWage.includes("80"));
+console.log("UC7F Any Part-time Wage:", anyPartTimeWage);
+
+// UC7G: Count number of days Employee worked
+const totalDaysWorked = empDailyWageArr.reduce((numOfDays, dailyWage) => (dailyWage > 0 ? numOfDays + 1 : numOfDays), 0);
+console.log("UC7G Number of Days Employee Worked:", totalDaysWorked);
