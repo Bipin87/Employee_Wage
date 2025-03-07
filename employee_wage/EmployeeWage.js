@@ -116,7 +116,7 @@ console.log("UC6 Total Days:", totalWorkingDaysUC6, "Total Hrs:", totalEmpHrsUC6
 // Print Daily Wages Array
 console.log("Daily Wages:", empDailyWageArr);
 
-//UC7: Employee Wage Problem to use Object Helper Functions and Arrow Functions to perform following operations
+//UC&: Employee Wage Problem to use Objects Helper Function and Arrow Functions to perform following operations
 
 // UC7A: Calculate total Wage using Array reduce method
 const totalWages = empDailyWageArr.reduce((total, dailyWage) => total + dailyWage, 0);
@@ -146,3 +146,25 @@ console.log("UC7F Any Part-time Wage:", anyPartTimeWage);
 // UC7G: Count number of days Employee worked
 const totalDaysWorked = empDailyWageArr.reduce((numOfDays, dailyWage) => (dailyWage > 0 ? numOfDays + 1 : numOfDays), 0);
 console.log("UC7G Number of Days Employee Worked:", totalDaysWorked);
+
+
+// UC8: Storing in Map and Computing Wages
+let totalWorkingDays = 0;
+let empDailyWageMap = new Map();
+
+// Reset totalEmpHrs
+totalEmpHrs = 0;
+
+while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let empHrs = getWorkingHours(empCheck);
+    totalEmpHrs += empHrs;
+    empDailyWageMap.set(totalWorkingDays, calcDailyWage(empHrs));
+}
+
+console.log("Employee Daily Wage Map:", empDailyWageMap);
+
+// Compute total wage using reduce method
+const totalWageFromMap = Array.from(empDailyWageMap.values()).reduce((total, dailyWage) => total + dailyWage, 0);
+console.log("UC8 - Total Wage using Map:", totalWageFromMap);
