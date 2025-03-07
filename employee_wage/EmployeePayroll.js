@@ -1,51 +1,72 @@
 class EmployeePayroll {
     // Properties
     id;
-    _name; // Private name property
+    _name;
     salary;
     gender;
     startDate;
 
-    // Constructor
+    // Constructor with validation
     constructor(id, name, salary, gender, startDate) {
-        this.id = id;
-        this._name = name;
-        this.salary = salary;
-        this.gender = gender;
-        this.startDate = startDate;
+        try {
+            // Validate ID and Salary 
+            if (!Number.isInteger(id) || id <= 0) {
+                throw new Error("Invalid ID: Must be a positive non-zero integer.");
+            }
+            if (!Number.isFinite(salary) || salary <= 0) {
+                throw new Error("Invalid Salary: Must be a positive number.");
+            }
+
+            // Validate Gender 
+            if (!/^(M|F)$/.test(gender)) {
+                throw new Error("Invalid Gender: Must be 'M' or 'F'.");
+            }
+
+            // Validate Start Date 
+            if (startDate && startDate > new Date()) {
+                throw new Error("Invalid Start Date: Cannot be in the future.");
+            }
+
+            this.id = id;
+            this._name = name;
+            this.salary = salary;
+            this.gender = gender;
+            this.startDate = startDate;
+        } catch (e) {
+            console.error(`Error creating Employee: ${e.message}`);
+            this.id = this._name = this.salary = this.gender = this.startDate = null;
+        }
     }
 
     // Getter and Setter for name
     get name() { return this._name; }
-    set name(name) {
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
-        if(nameRegex.test(name))
-
-            this._name = name;
-        else throw "Name is Incorrect!";
-     }
+    set name(name) { this._name = name; }
 
     // Method to return object details as a string
     toString() {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const empDate = !this.startDate ? "undefined" :
-                        this.startDate.toLocaleDateString("en-US", options);
+        const empDate = this.startDate ? this.startDate.toLocaleDateString("en-US", options) : "undefined";
         return `id=${this.id}, name='${this._name}', salary=${this.salary}, gender=${this.gender}, startDate=${empDate}`;
     }
 }
 
-// Creating EmployeePayroll object
-let employeePayrollData = new EmployeePayroll(1, "Bipin Kumar Sahu", 30000);
-console.log(employeePayrollData.toString());
+// Test Cases
+try {
+    let validEmployee = new EmployeePayroll(1, "Bipin Kumar Sahu", 50000, "M", new Date("2023-05-10"));
+    console.log(validEmployee.toString());
 
-try{
-    
-    employeePayrollData.name = "bipin";
-    console.log(employeePayrollData.toString());
-}catch(e){
-    console.error(e);
+    let invalidIdEmployee = new EmployeePayroll(0, "Sadhana", 40000, "F", new Date("2023-06-15"));
+    console.log(invalidIdEmployee.toString());
+
+    let invalidSalaryEmployee = new EmployeePayroll(2, "Aryan", -5000, "M", new Date("2023-04-20"));
+    console.log(invalidSalaryEmployee.toString());
+
+    let invalidGenderEmployee = new EmployeePayroll(3, "ABC", 35000, "X", new Date("2023-02-18"));
+    console.log(invalidGenderEmployee.toString());
+
+    let futureDateEmployee = new EmployeePayroll(4, "Durgesh", 45000, "M", new Date("2026-01-01"));
+    console.log(futureDateEmployee.toString());
+
+} catch (error) {
+    console.error(`Error: ${error.message}`);
 }
-
-// Creating a new EmployeePayroll object with gender and startDate
-let newEmployeePayrollData = new EmployeePayroll(2, "Aryan", 32000, "F", new Date());
-console.log(newEmployeePayrollData.toString());
