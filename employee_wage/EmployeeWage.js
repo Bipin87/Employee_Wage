@@ -168,3 +168,46 @@ console.log("Employee Daily Wage Map:", empDailyWageMap);
 // Compute total wage using reduce method
 const totalWageFromMap = Array.from(empDailyWageMap.values()).reduce((total, dailyWage) => total + dailyWage, 0);
 console.log("UC8 - Total Wage using Map:", totalWageFromMap);
+
+
+// UC 9: Arrow Functions
+
+// Arrow function to calculate total sum
+const findTotal = (totalVal, dailyVal) => totalVal + dailyVal;
+
+// Initialize empDailyHrsMap to store daily hours
+let empDailyHrsMap = new Map();
+totalWorkingDays = 0;
+totalEmpHrs = 0;
+
+while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let empHrs = getWorkingHours(empCheck);
+    totalEmpHrs += empHrs;
+    empDailyHrsMap.set(totalWorkingDays, empHrs);
+}
+
+let totalHours = Array.from(empDailyHrsMap.values()).reduce(findTotal, 0);
+let totalSalary = empDailyWageArr
+    .filter(dailyWage => dailyWage > 0)
+    .reduce(findTotal, 0);
+
+console.log("UC9A - Emp Wage with Arrow: Total Hours: " + totalHours + " Total Wages: " + totalSalary);
+
+// Arrays to store working days category
+let nonWorkingDays = [];
+let partWorkingDays = [];
+let fullWorkingDays = [];
+
+// Categorizing working days
+empDailyHrsMap.forEach((value, key) => {
+    if (value === 8) fullWorkingDays.push(key);
+    else if (value === 4) partWorkingDays.push(key);
+    else nonWorkingDays.push(key);
+});
+
+// Display results
+console.log("Full Working Days: " + fullWorkingDays);
+console.log("Part Working Days: " + partWorkingDays);
+console.log("Non Working Days: " + nonWorkingDays);
