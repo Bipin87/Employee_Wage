@@ -240,3 +240,10 @@ while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS
 
 // Print the stored daily hours and wages
 console.log("UC 10 Showing Daily Hours Worked and Wage Earned: " + empDailyHrsAndWageArr);
+
+
+// UC 11: Object Operations Using Arrow Functions
+let totalWagesUC11 = empDailyHrsAndWageArr.reduce((total, obj) => total + obj.dailyWage, 0);
+let totalHoursUC11 = empDailyHrsAndWageArr.reduce((total, obj) => total + obj.dailyHours, 0);
+
+console.log("UC 11A Total Hours:", totalHoursUC11, "Total Wages:", totalWagesUC11);
